@@ -1,12 +1,10 @@
 package com.somemone.basehold.base;
 
-import com.massivecraft.factions.FPlayer;
 import com.somemone.basehold.BaseHold;
-import com.somemone.basehold.teams.Team;
+import com.somemone.basehold.teams.BaseTeam;
 import org.bukkit.Bukkit;
-import org.bukkit.boss.BossBar;
+import org.bukkit.boss.BarColor;
 import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
 
@@ -25,11 +23,12 @@ public class PlayersCheck implements Runnable {
             return;
         }
 
-        base.bossBar.setTitle("Gaining: " + base.currentHolder);
+        base.bossBar.setTitle("Gaining: " + base.currentHolder.getTitle());
+        base.bossBar.setColor(base.currentHolder.getColor());
 
         if ((currentProgress + base.increment) >= 1.0) {
 
-            base.bossBar.setTitle("Held by: " + base.currentHolder);
+            base.bossBar.setTitle("Held by: " + base.currentHolder.getTitle());
 
         }
 
@@ -43,10 +42,11 @@ public class PlayersCheck implements Runnable {
 
         double currentProgress = base.bossBar.getProgress() - base.increment;
 
-        base.bossBar.setTitle("Losing: " + base.currentHolder);
+        base.bossBar.setTitle("Losing: " + base.currentHolder.getTitle());
 
         if (currentProgress <= 0.0) {
             base.bossBar.setTitle("No Holder");
+            base.bossBar.setColor(BarColor.WHITE);
         }
 
         if (currentProgress < 0.0) {
@@ -72,15 +72,13 @@ public class PlayersCheck implements Runnable {
         // Checks for players in base
 
         ArrayList<Player> playersInBase = base.getPlayersInBase();
-        ArrayList<String> baseHolders = new ArrayList<>();
+        ArrayList<BaseTeam> baseHolders = new ArrayList<>();
 
         playersInBase.forEach((player) -> {
 
-            if (BaseHold.findTeamFromPlayer(player) != null) {
-                baseHolders.add(player.getName());
-            } else {
-                Team team = BaseHold.findTeamFromPlayer(player);
-                baseHolders.add(team.name);
+            BaseTeam team = BaseHold.teams.get(player);
+            if (!baseHolders.contains(team)) {
+                baseHolders.add(team);
             }
 
         });
