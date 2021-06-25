@@ -1,0 +1,16 @@
+name: BaseHold
+version: 1.0-SNAPSHOT
+main: com.somemone.basehold.BaseHold
+api-version: 1.17
+load: POSTWORLD
+
+depend: [Factions]
+
+commands:
+  definebase:
+    description: Defines new base
+    usage: /definebase [x1] [y1] [z1] [x2] [y2] [z2]
+
+  clearallbars:
+    description: Clears all bars
+    usage: /clearallbars

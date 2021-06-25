@@ -1,0 +1,8 @@
+com\somemone\basehold\base\PlayersCheck.class
+com\somemone\basehold\teams\Team.class
+com\somemone\basehold\teams\TeamsCommand.class
+com\somemone\basehold\command\DefineCommand.class
+com\somemone\basehold\BaseHold.class
+com\somemone\basehold\util\DistanceFinder.class
+com\somemone\basehold\base\Base.class
+com\somemone\basehold\command\ClearAllBarsCommand.class
